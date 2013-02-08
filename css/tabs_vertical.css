@@ -1,0 +1,41 @@
+body {
+    padding: 20px;
+
+}
+
+ul {
+    display: block;
+    float: left;
+    width: 100px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border-radius: 10px 0 0 10px;
+    overflow: hidden;
+
+}
+
+li a{
+    background: #999;
+    color: white;
+    display: block;
+    font-style: italic;
+    padding: 0 10px;
+    text-decoration: none;
+    line-height: 21pt;
+
+}
+
+.tabsContainer {
+    border: solid 2px #999;
+    border-left: none;
+    border-radius: 0 10px 10px 0;
+    float: left;
+    height: 88px;
+    padding: 10px;
+
+}
+
+a.active {
+    background: #666;
+
+}

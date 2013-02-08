@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+    <meta content="utf-8" http-equiv="encoding">
+    <title>keyContentSwitcher - Use another attributes</title>
+    <script type="text/javascript" src="./../js/jquery-1.7.1.min.js"></script>
+    <script type="text/javascript" src="../js/kcSwitcher-0.5.1.2.js"></script>
+    <link rel="stylesheet" href="./../css/reset.css"/>
+    <link rel="stylesheet" href="../css/kcSwitcher.css"/>
+    <link rel="stylesheet" href="../css/tabs_vertical.css"/>
+    <style>
+        .tabsContainer .selected{
+            display: block;
+        }
+        li a.selected{
+            background: #666;
+        }
+        h1 {margin: 10px;}
+    </style>
+    <script type="text/javascript">
+        // переопределим атрибуты и класс
+        keyContentSwitcher.applySettings( {linkOfGroup : "lg", contentOfGroup : "cg", keyInGroup : "k", activeClass : "selected", prefix: "a_"});
+    </script>
+    <!--[if IE 6]><link href="../css/ie6.css" rel="stylesheet" media="all" /><![endif]-->
+</head>
+<body>
+<h1>Внешний вид тот же что и <a href="tabs_vertical.html">здесь</a> - а вот вёртска слегка отличается</h1>
+<!-- ссылки -->
+<ul>
+    <li><a href="#" a_lg="tabs-horizontal" a_k="1">Раз</a></li>
+    <li><a href="#" a_lg="tabs-horizontal" a_k="2">Два</a></li>
+    <li><a href="#" a_lg="tabs-horizontal" a_k="3">Три</a></li>
+    <li><a href="#" a_lg="tabs-horizontal" a_k="4">Четыре</a></li>
+</ul>
+<div class="clear"></div>
+<!-- содержимое -->
+<div class="tabsContainer">
+    <div class="tabHidden" a_cg="tabs-horizontal" a_k="1">
+        <h3>Это содержание номер 1</h3>
+    </div>
+    <div class="tabHidden" a_cg="tabs-horizontal" a_k="2">
+        <h3>Это содержание номер 2</h3>
+    </div>
+    <div class="tabHidden" a_cg="tabs-horizontal" a_k="3">
+        <h3>Это содержание номер 3</h3>
+    </div>
+    <div class="tabHidden" a_cg="tabs-horizontal" a_k="4">
+        <h3>Это содержание номер 4</h3>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+
+li div {
+    font-style: italic;
+    height: 0;
+    line-height: 20px;
+    overflow: hidden;
+    padding: 0 9px;
+    -moz-transition:all 0.2s ease-out;
+    -webkit-transition:all 0.2s ease-out;
+    -o-transition:all 0.2s ease-out;
+    transition:all 0.2s ease-out;
+    -moz-transition-delay:0.15s;
+    -webkit-transition-delay:0.15s;
+    -o-transition-delay:0.15s;
+    transition-delay:0.15s;
+
+}
+li div.active {
+    height: 40px;
+    padding: 9px;
+}
+ul {
+    border: 2px solid #999999;
+    border-radius: 10px 10px 10px 10px;
+    padding: 0;
+    width: 150px;
+    overflow: hidden;
+}
+li > a {
+    background: none repeat scroll 0 0 #999999;
+    border-bottom: 1px solid #FFFFFF;
+    color: white;
+    display: block;
+    padding: 8px 16px;
+    text-decoration: none;
+}
+li:last-child > a {
+    border: medium none;
+}
+li {
+}

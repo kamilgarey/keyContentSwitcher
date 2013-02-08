@@ -1,0 +1,7 @@
+.tabHidden{
+    display: none;
+}
+
+.tabsContainer > .active{
+    display: block;
+}

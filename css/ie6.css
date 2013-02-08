@@ -1,0 +1,11 @@
+ul li {
+    height: 28px;
+}
+
+.tabsContainer .active{
+    display: block;
+}
+
+.tabsContainer .tabHidden .tabHidden{
+    display: none;
+}
