@@ -14,19 +14,19 @@ keyContentSwitcher = new (function () {
     this.activeClass = "active";
 
     /**
-     * Используется для возможности разрешать ситуации при использовании атрибутов с аналогичными именами другими библиотеками
-     * @type {String}
-     */
+    * Используется для возможности разрешать ситуации при использовании атрибутов с аналогичными именами другими библиотеками
+    * @type {String}
+    */
     this.prefix = "data-";
 
     /**
-     * Константы типа содержимого
-     * @type {Object}
-     */
+    * Константы типа содержимого
+    * @type {Object}
+    */
     this.ItemType = {
-        content:1, // 01
-        link:2, // 10
-        both:3   // 11
+        content: 1, // 01
+        link: 2, // 10
+        both: 3   // 11
     };
     // события
     var groupEventsHandlers = [];
@@ -38,11 +38,11 @@ keyContentSwitcher = new (function () {
     this._set = false;
 
     /**
-     * Устанавливает параметры. Используется при необходимости переопределить стандартные параметры и/или для исключения групп из списка
-     * активации.
-     *
-     * @param {Object} [options]
-     */
+    * Устанавливает параметры. Используется при необходимости переопределить стандартные параметры и/или для исключения групп из списка
+    * активации.
+    *
+    * @param {Object} [options]
+    */
     this.applySettings = function (options) {
         options = options || {};
         jQuery.extend(true, self, options);
@@ -62,8 +62,8 @@ keyContentSwitcher = new (function () {
     };
 
     /**
-     * Инициализация библиотеки
-     */
+    * Инициализация библиотеки
+    */
     this.init = function () {
         if (!self._set) {
             self.applySettings();
@@ -74,8 +74,12 @@ keyContentSwitcher = new (function () {
         }
         // стандартная логика смены активного содержимого группы по клике на элементе "ссылке"
         var selector = self.getItemsSelector(self.ItemType.link);
-        if (jQuery.fn.jquery >= "1.4.2") {
-            jQuery(document).delegate(selector, "click", handler);
+        var version = jQuery.fn.jquery;
+        if (version >= "1.7") {
+            jQuery(document.body).on("click", selector, handler);
+        } else
+         if (version >= "1.4.2") {
+            jQuery(document.body).delegate(selector, "click", handler);
         } else {
             jQuery(selector).live("click", handler);
         }
@@ -90,11 +94,11 @@ keyContentSwitcher = new (function () {
     };
 
     /**
-     * Внутренняя функция. Добавлет обработчика
-     * @param {String} event
-     * @param {String} groupKey
-     * @param {Function} handler
-     */
+    * Внутренняя функция. Добавлет обработчика
+    * @param {String} event
+    * @param {String} groupKey
+    * @param {Function} handler
+    */
     function addHandler(event, groupKey, handler) {
         if (groupKey == null) {
             groupEventsHandlers[event] = null;
@@ -107,27 +111,27 @@ keyContentSwitcher = new (function () {
     }
 
     /**
-     * Добавляет обработчик события смены активного содержимого
-     * @param {String|null} groupKey имя группы, если вызывается для всех групп
-     * @param {Function} handler
-     */
+    * Добавляет обработчик события смены активного содержимого
+    * @param {String|null} groupKey имя группы, если вызывается для всех групп
+    * @param {Function} handler
+    */
     this.tabChanged = function (groupKey, handler) {
         addHandler("onTabChanged", groupKey, handler);
     };
 
     /**
-     * Добавляет обработчик события BeforeTabChange возникает перед сменой активного содержимого
-     * @param {String|null} groupKey имя группы, если вызывается для всех групп
-     * @param {Function} handler
-     */
+    * Добавляет обработчик события BeforeTabChange возникает перед сменой активного содержимого
+    * @param {String|null} groupKey имя группы, если вызывается для всех групп
+    * @param {Function} handler
+    */
     this.beforeTabChanged = function (groupKey, handler) {
         addHandler("beforeTabChanged", groupKey, handler);
     };
 
     /**
-     * Генерирует ошибку если не задано имя группы
-     * @param {String|null|undefined} groupKey
-     */
+    * Генерирует ошибку если не задано имя группы
+    * @param {String|null|undefined} groupKey
+    */
     function checkGroupKey(groupKey) {
         if (groupKey == null) {
             throw new Error("Не указан ключ группы");
@@ -135,10 +139,10 @@ keyContentSwitcher = new (function () {
     }
 
     /**
-     * Возвращает активный ключ для группы
-     * @param {String} groupKey название группы
-     * @return {String|undefined}
-     */
+    * Возвращает активный ключ для группы
+    * @param {String} groupKey название группы
+    * @return {String|undefined}
+    */
     this.getActiveKey = function (groupKey) {
         checkGroupKey(groupKey);
         // используем селектор - активное содержимое для группы.
@@ -146,30 +150,30 @@ keyContentSwitcher = new (function () {
     };
 
     /**
-     * Возращает элементы содержимого по ключу и группе
-     * @param groupKey название группы, если не указано будет произведён поиск во всех группах
-     * @param contentKey ключ в группе, если не указан вернуться все содержимые (для указанной группы, если указана)
-     * @return {*|jQuery|HTMLElement}
-     */
+    * Возращает элементы содержимого по ключу и группе
+    * @param groupKey название группы, если не указано будет произведён поиск во всех группах
+    * @param contentKey ключ в группе, если не указан вернуться все содержимые (для указанной группы, если указана)
+    * @return {*|jQuery|HTMLElement}
+    */
     this.getContents = function (groupKey, contentKey) {
-        return  jQuery(self.getItemsSelector(self.ItemType.content, groupKey, contentKey))
+        return jQuery(self.getItemsSelector(self.ItemType.content, groupKey, contentKey))
     };
 
     /**
-     * Возращает элементы сслылки по ключу и группе
-     * @param {String|undefined|null} groupKey название группы, если не указано будет произведён поиск во всех группах
-     * @param {String|undefined|null} contentKey ключ в группе, если не указан вернуться все ссылки (для указанной группы, если указана)
-     * @return {*|jQuery|HTMLElement}
-     */
+    * Возращает элементы сслылки по ключу и группе
+    * @param {String|undefined|null} groupKey название группы, если не указано будет произведён поиск во всех группах
+    * @param {String|undefined|null} contentKey ключ в группе, если не указан вернуться все ссылки (для указанной группы, если указана)
+    * @return {*|jQuery|HTMLElement}
+    */
     this.getLinks = function (groupKey, contentKey) {
         return jQuery(self.getItemsSelector(self.ItemType.link, groupKey, contentKey));
     };
 
     /**
-     * Возвращает имя группы для элемента
-     * @param {object} element Html элемент
-     * @return {undefined|String}
-     */
+    * Возвращает имя группы для элемента
+    * @param {object} element Html элемент
+    * @return {undefined|String}
+    */
     this.getGroupForElement = function (element) {
         return jQuery(element).attr(
             jQuery(element).attr(self.linkOfGroup) === undefined
@@ -178,20 +182,20 @@ keyContentSwitcher = new (function () {
     };
 
     /**
-     * Основная функция для получения селекторов для различных операций библиотеки.
-     * Не предназначена для непосредственного использования без хорошего знания библиотеки
-     *
-     * @param {Integer} kind - элемент перичесления из ItemType
-     * @param {String|undefined|null} [groupKey = undefined] имя группы
-     * @param {String|undefined|null} [contentKey = undefined] имя ключа в группе
-     * @return {String} css selector to get items
-     */
+    * Основная функция для получения селекторов для различных операций библиотеки.
+    * Не предназначена для непосредственного использования без хорошего знания библиотеки
+    *
+    * @param {Integer} kind - элемент перичесления из ItemType
+    * @param {String|undefined|null} [groupKey = undefined] имя группы
+    * @param {String|undefined|null} [contentKey = undefined] имя ключа в группе
+    * @return {String} css selector to get items
+    */
     this.getItemsSelector = function (kind, groupKey, contentKey) {
         /**
-         *
-         * @param {Integer} checkedKind
-         * @return {String}
-         */
+        *
+        * @param {Integer} checkedKind
+        * @return {String}
+        */
         function getSubSelect(checkedKind) {
             return (kind & checkedKind)
                 ? "[" +
@@ -213,28 +217,28 @@ keyContentSwitcher = new (function () {
     };
 
     /**
-     * Возвращает имя ключа в группе указанного элемента
-     * @param {Object} element
-     * @return {String|undefined}
-     */
+    * Возвращает имя ключа в группе указанного элемента
+    * @param {Object} element
+    * @return {String|undefined}
+    */
     this.getItemKey = function (element) {
         return jQuery(element).attr(self.keyInGroup);
     };
 
     /**
-     * Деактивирует активный ключ группы. Если не указан ключ будут деактивированны все группы
-     * @param {String|undefined} groupKey
-     */
+    * Деактивирует активный ключ группы. Если не указан ключ будут деактивированны все группы
+    * @param {String|undefined} groupKey
+    */
     this.unActivateAll = function (groupKey) {
         jQuery(self.getItemsSelector(self.ItemType.both, groupKey)).removeClass(self.activeClass);
     };
 
     /**
-     * Вызов обработчиков события.
-     * @param {String} group группа (название группы)
-     * @param {String} key ключ в группе
-     * @param {String} eventName наименование события
-     */
+    * Вызов обработчиков события.
+    * @param {String} group группа (название группы)
+    * @param {String} key ключ в группе
+    * @param {String} eventName наименование события
+    */
     function fireEvent(group, key, eventName) {
         var result = true;
         // сначала вызывается общий обработчик
@@ -248,11 +252,11 @@ keyContentSwitcher = new (function () {
     }
 
     /**
-     * Выбор активного ключа
-     * @param {String} groupKey группа (название группы)
-     * @param {String} contentKey активируемый ключ в группе
-     * @return {Boolean}
-     */
+    * Выбор активного ключа
+    * @param {String} groupKey группа (название группы)
+    * @param {String} contentKey активируемый ключ в группе
+    * @return {Boolean}
+    */
     this.setActiveKey = function (groupKey, contentKey) {
         var canChange = fireEvent(groupKey, contentKey, "beforeTabChanged");
         if (canChange) {
@@ -264,10 +268,10 @@ keyContentSwitcher = new (function () {
     };
 
     /**
-     * Обработчик клика по ссылке
-     * @param {Object} initializer Html элемент вызвавший активизацию события
-     * @return {Boolean}
-     */
+    * Обработчик клика по ссылке
+    * @param {Object} initializer Html элемент вызвавший активизацию события
+    * @return {Boolean}
+    */
     function fireLinkClick(initializer) {
         var groupKey = self.getGroupForElement(initializer);
         var contentKey = self.getItemKey(initializer);
@@ -275,18 +279,18 @@ keyContentSwitcher = new (function () {
     }
 
     /**
-     * Активизирует динамически добавленную или указанную в списке неактивируемых группы.
-     * @param {String} groupKey
-     */
+    * Активизирует динамически добавленную или указанную в списке неактивируемых группы.
+    * @param {String} groupKey
+    */
     this.activateGroup = function (groupKey) {
         activateGroups(self.getItemsSelector(self.ItemType.content, groupKey));
     };
 
     /**
-     * Вызывается по загрузке страницы для активации переключателей(выбора активного элемента если он не задан)
-     * @param {String} jqSelector
-     * @param {Array|undefined} [ignoredGroupKeys]
-     */
+    * Вызывается по загрузке страницы для активации переключателей(выбора активного элемента если он не задан)
+    * @param {String} jqSelector
+    * @param {Array|undefined} [ignoredGroupKeys]
+    */
     function activateGroups(jqSelector, ignoredGroupKeys) {
         ignoredGroupKeys = ignoredGroupKeys || [];
         self.groups = {}; // ссылка для использования в сallback функции перебора
@@ -295,7 +299,7 @@ keyContentSwitcher = new (function () {
             // добавляем в группу
             var groups = self.groups;
             if (groups[key] == null) {
-                groups[key] = {hasActive:false, htmlElements:[]};
+                groups[key] = { hasActive: false, htmlElements: [] };
             }
             groups[key].hasActive += jQuery(this).hasClass(self.activeClass);
             groups[key].htmlElements.push(this);
