@@ -1,7 +1,7 @@
 keyContentSwitcher
 ==================
 
-JS library to ease make a content swithcer like tabs, accordion and so on
+JS library to ease make a content switcher like tabs, accordion and so on
 
 Now description is only in russian language.
 
