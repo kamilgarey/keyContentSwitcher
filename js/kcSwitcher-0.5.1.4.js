@@ -1,3 +1,4 @@
+/*! jQuery v1.7.1 | jquery.org/license */
 /*
  * Content switcher based on keys
  *
