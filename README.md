@@ -8,7 +8,7 @@ After creation it was realised that library can be used in over ways.
 
 **Then you can use it**
 
-The destination of the library is to help one create a control which would be show (or shown as selected) a content from variaty with custom CSS and without any JS (but there is an API in case you need it).
+The destination of the library is to help one create a control which would be show (or shown as selected) content from a variety with custom CSS and without any JS (but there is an API in case you need it).
 
 You probably will do need this library if you are using modern frameworks and libraries.
 But it may help you if you use jquery only. Also there is version of library where dependency from jquery was removed which can be used in case you need lightweight JS. But this version is not tested well.
