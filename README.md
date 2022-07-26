@@ -3,23 +3,75 @@ keyContentSwitcher
 
 **History**
 
-This is library is the reaction on jquery-ui. Then main goal was to create tabs but without redundant mess of JS and CSS of jquery UI.
+This library is the reaction on jquery-ui. Then main goal was to create tabs but without redundant mess of JS and CSS of jquery UI.
 After creation it was realised that library can be used in over ways.
 
-**Then you can use it**
+**Destination**
 
-The destination of the library is to help one create a control which would be show (or shown as selected) content from a variety with custom CSS and without any JS you just need to put html attributes (but there is an API in case you need it).
+The destination of the library is to rapid creation subset of controls: vertical/horizontal tabs amd menus, accordions, etc. Common is that such control show (or marked as selected) content from a variety with your custom CSS and without any JS in base cases.
 
-You probably will do need this library if you are using modern frameworks and libraries.
-But it may help you if you use jquery only. Also there is version of library where dependency from jquery was removed which can be used in case you need lightweight JS. But this version is not tested well.
+In modern frameworks and React based ecosistem this functionality can be esaly implemented.
+So library may be handy only if there is no (or low) interaction with framework.
+But it may help you a lot if you use jquery only or even vanila js.
+**Note**: version  where dependence from jquery was removed is not tested well.
 
-**Description**
+**Samples**
 
-There are samples that shows how the library can be used. It's the case than the code disribed itself better than a description. Index contains a description (on russian) and links to all samples.
+**_index.html_** contains a description (on russian) and links to all samples.
 
-**License**
+## Basis
+1
+There are html elements triggers. They should have two html attributes: __**data-link-of-group="unique_key_of_control" data-key-in-group="key_of_content_in_control"**__
 
-MIT License
+For example: __**data-link-of-group="tabs_vertical" data-key-in-group="1"**__
+
+Wnen one clicking trigger (or by api call) html content element within the same contol and having the same key  got css class **"active"**
+<br/>
+<br/>
+<br/>
+2
+Html content elements should have two html attributes: **_data-content-of-group="unique_key_of_control" data-key-in-group="key_of_content_in_control"_**
+
+For example: **_data-content-of-group="tabs_vertical" data-key-in-group="1"_**
+
+If there is no html content in group with css class **"active"** one get css class **"active"**. 
+
+## Advanced Usage
+```javascript
+keyContentSwitcher.tabChanged(unique_key_of_control, function(unique_key_of_control, key-in-control)
+```
+Add tabChanged event handler. If unique_key_of_control is null handler is set for all controlls
+<br/>
+<br/>
+```javascript
+keyContentSwitcher.beforeTabChanged (unique_key_of_control, function(unique_key_of_control, key-in-control)
+```
+Add beforeTabChanged event handler. If handler returns false changing of active content element would be cancelled. If unique_key_of_control is null handler is set for all controlls
+<br/>
+<br/>
+```javascript
+keyContentSwitcher.applySettings({ignoredToActivateGroup:["unique_key_of_control",...]});
+```
+Suppress activation of controls. This can be useful in case of embedded tabs. If parent tab is not shown and activation of child tab involve ajax request.
+_You should activate child tab by api call later_
+<br/>
+<br/>
+```javascript
+keyContentSwitcher.activateGroup = function (groupName)
+```
+Activate dynamically added control or control which activation was suppressed.
+<br/>
+<br/>
+```javascript
+keyContentSwitcher.applySettings( {linkOfGroup : "link-of-group", contentOfGroup : "content-of-group", keyInGroup : "key-in-group", activeClass : "active", prefix: "data-"});
+```
+Change one or several default hmll/css settings
+
+
+
+## License
+
+**MIT License**
 
 Copyright (c) [2022] [Kamil Gareev]
 
