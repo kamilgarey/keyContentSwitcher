@@ -1,92 +1,115 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-    <title>keyContentSwitcher - Sub Folders Examples</title>
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="utf-8" http-equiv="encoding">
-    <script type="text/javascript" src="./../js/jquery-1.7.1.min.js"></script>
-    <script type="text/javascript" src="../js/kcSwitcher-0.5.1.4.js"></script>
+	<title>keyContentSwitcher - Sub Tabs Examples</title>
+	<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+	<meta content="utf-8" http-equiv="encoding">
+	<script type="text/javascript" src="./../js/jquery-1.7.1.min.js"></script>
+	<script type="text/javascript" src="../js/kcSwitcher-0.5.1.4.js"></script>
 
-    <!--<script type="text/javascript" src="../js/jq-kcSwitcher-0.5.1.3.js"></script>-->
-    <script type="text/javascript">
-        var subfolderInitialized = false;
-        var limit;
-        var applyIgnoring = document.location.href.indexOf("ingoringOff") < 0;
-        if (applyIgnoring) {
-            keyContentSwitcher.applySettings({ignoredToActivateGroups:["tabs-subfolder"]});
-            keyContentSwitcher.tabChanged("tabs-horizontal", function (groupKey, keyInGroup) {
-                if (keyInGroup == 2 && !subfolderInitialized) {
-                    keyContentSwitcher.activateGroup("tabs-subfolder");
-                    subfolderInitialized = true;
-                }
-            });
-        }
+	<!--<script type="text/javascript" src="../js/jq-kcSwitcher-0.5.1.3.js"></script>-->
+	<script type="text/javascript">
+		var workEmulator = (function ()
+		{
+			this.limit = 0;
+			this = function ()
+			{
+				var percentage = jQuery(".progress-bar div");
+				var newWidth = percentage.width() + 10;
+				percentage.width(newWidth);
+				if (newWidth < limit)
+				{
+					setInterval(this.increasePercentage(), 40);
+				} else
+				{
+					$("h4").text("Complete");
+				}
+			}
 
-        function increasePercentage() {
-            var percentage = jQuery(".progress-bar div");
-            var newWidth = percentage.width() + 10;
-            percentage.width(newWidth);
-            if (newWidth < limit) {
-                setInterval(increasePercentage, 40);
-            } else {
-                $("h4").text("Завершено");
-            }
-        }
-        keyContentSwitcher.tabChanged("tabs-subfolder", function (groupKey, keyInGroup) {
-            if (!subfolderInitialized) {
-                limit = $(".progress-bar").width();
-                setInterval(increasePercentage, 40);
-            }
-        });
-    </script>
-    <link rel="stylesheet" href="./../css/reset.css"/>
-    <link rel="stylesheet" href="../css/kcSwitcher.css"/>
-    <link rel="stylesheet" href="./../css/subfolder.css"/>
+
+		})()
+		var subfolderInitialized = false;
+
+		keyContentSwitcher.applySettings({ ignoredToActivateGroups: ["tabs-subfolder"] });
+		keyContentSwitcher.tabChanged("tabs-horizontal", function (groupKey, keyInGroup)
+		{
+			if (keyInGroup == 2 && !subfolderInitialized)
+			{
+				keyContentSwitcher.activateGroup("tabs-subfolder");
+				subfolderInitialized = true;
+			}
+		});
+
+
+		keyContentSwitcher.tabChanged("tabs-subfolder", function (groupKey, keyInGroup)
+		{
+			if (!subfolderInitialized)
+			{
+				limit = $(".progress-bar").width();
+				setInterval(increasePercentage, 40);
+			}
+		});
+	</script>
+	<link rel="stylesheet" href="./../css/reset.css" />
+	<link rel="stylesheet" href="../css/kcSwitcher.css" />
+	<link rel="stylesheet" href="./../css/subfolder.css" />
 </head>
+
 <body>
-<!-- ссылки -->
-<ul>
-    <li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="1">Раз</a></li>
-    <li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="2">Вкладка со вложенным содержимым</a></li>
-    <li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="3">Три</a></li>
-    <li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="4">Четыре</a></li>
-</ul>
-<div class="clear"></div>
-<!-- содержимое -->
-<div class="tabsContainer">
+	<h2>
+		First multitab suppress initialization for subtab <br />
+		we do initialization by js on sub tab only when the
+	</h2>
 
-    <div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="1">
-        <h3>Это содержание номер 1</h3>
-    </div>
-    <div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="2">
-        <h3>Вкладка со вложенным переключателем</h3>
-        <ul>
-            <li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="1">Раз Раз</a></li>
-            <li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="2">Раз Два</a></li>
-        </ul>
-        <div class="clear"></div>
-        <div class="tabsContainer">
-            <div class="tabHidden" data-content-of-group="tabs-subfolder" data-key-in-group="1">
-                <h3>Это содержание номер 2.1</h3>
-                <h4>Что-то делаем</h4>
+	<!-- triggers -->
+	<ul>
+		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="1">Раз</a></li>
+		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="2">Вкладка со вложенным содержимым</a>
+		</li>
+		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="3">Три</a></li>
+		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="4">Четыре</a></li>
+	</ul>
+	<div class="clear"></div>
+	<!-- cotains -->
+	<div class="tabsContainer">
 
-                <div class="progress-bar">
-                    <div></div>
-                </div>
-            </div>
-            <div class="tabHidden" data-content-of-group="tabs-subfolder" data-key-in-group="2">
-                <h3>Это содержание номер 2.2</h3>
-            </div>
-        </div>
-    </div>
-    <div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="3">
-        <h3>Это содержание номер 3</h3>
-    </div>
-    <div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="4">
-        <h3>Это содержание номер 4</h3>
-    </div>
-</div>
-<h2>Добавьте <b>?ingoringOff</b> в адресную строчку и загрузите. Действие на вложенной вкладке начнётся сразу по загрузке страницы</h2>
+		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="1">
+			<h3>Это содержание номер 1</h3>
+		</div>
+		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="2">
+			<h3>Вкладка со вложенным переключателем</h3>
+			<ul>
+				<li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="1">Раз Раз</a></li>
+				<li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="2">Раз Два</a></li>
+			</ul>
+			<div class="clear"></div>
+			<div class="tabsContainer">
+				<div class="tabHidden" data-content-of-group="tabs-subfolder" data-key-in-group="1">
+					<h3>Это содержание номер 2.1</h3>
+					<h4>Что-то делаем</h4>
+
+					<div class="progress-bar">
+						<div></div>
+					</div>
+				</div>
+				<div class="tabHidden" data-content-of-group="tabs-subfolder" data-key-in-group="2">
+					<h3>Это содержание номер 2.2</h3>
+				</div>
+			</div>
+		</div>
+		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="3">
+			<h3>Это содержание номер 3</h3>
+			<h3>Это содержание номер 3</h3>
+		</div>
+		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="4">
+			<h3>Это содержание номер 4</h3>
+			<h3>Это содержание номер 4</h3>
+			<h3>Это содержание номер 4</h3>
+		</div>
+	</div>
+
 
 </body>
+
 </html>
