@@ -13,6 +13,7 @@
 		var workEmulator = (function ()
 		{
 			this.limit = 0;
+			/*
 			this = function ()
 			{
 				var percentage = jQuery(".progress-bar div");
@@ -26,7 +27,7 @@
 					$("h4").text("Complete");
 				}
 			}
-
+*/
 
 		})()
 		var subfolderInitialized = false;
@@ -64,48 +65,48 @@
 
 	<!-- triggers -->
 	<ul>
-		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="1">Раз</a></li>
+		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="1">One</a></li>
 		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="2">Вкладка со вложенным содержимым</a>
 		</li>
-		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="3">Три</a></li>
-		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="4">Четыре</a></li>
+		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="3">Three</a></li>
+		<li><a href="#" data-link-of-group="tabs-horizontal" data-key-in-group="4">Four</a></li>
 	</ul>
 	<div class="clear"></div>
 	<!-- cotains -->
 	<div class="tabsContainer">
 
 		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="1">
-			<h3>Это содержание номер 1</h3>
+			<h3>This is content number 1</h3>
 		</div>
 		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="2">
-			<h3>Вкладка со вложенным переключателем</h3>
+			<h3>Tab with embedded switcher</h3>
 			<ul>
-				<li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="1">Раз Раз</a></li>
-				<li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="2">Раз Два</a></li>
+				<li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="1">One One</a></li>
+				<li><a href="#" data-link-of-group="tabs-subfolder" data-key-in-group="2">One Two</a></li>
 			</ul>
 			<div class="clear"></div>
 			<div class="tabsContainer">
 				<div class="tabHidden" data-content-of-group="tabs-subfolder" data-key-in-group="1">
-					<h3>Это содержание номер 2.1</h3>
-					<h4>Что-то делаем</h4>
+					<h3>This is content number 2.1</h3>
+					<h4>Do something</h4>
 
 					<div class="progress-bar">
 						<div></div>
 					</div>
 				</div>
 				<div class="tabHidden" data-content-of-group="tabs-subfolder" data-key-in-group="2">
-					<h3>Это содержание номер 2.2</h3>
+					<h3>This is content number 2.2</h3>
 				</div>
 			</div>
 		</div>
 		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="3">
-			<h3>Это содержание номер 3</h3>
-			<h3>Это содержание номер 3</h3>
+			<h3>This is content number 3</h3>
+			<h3>This is content number 3</h3>
 		</div>
 		<div class="tabHidden" data-content-of-group="tabs-horizontal" data-key-in-group="4">
-			<h3>Это содержание номер 4</h3>
-			<h3>Это содержание номер 4</h3>
-			<h3>Это содержание номер 4</h3>
+			<h3>This is content number 4</h3>
+			<h3>This is content number 4</h3>
+			<h3>This is content number 4</h3>
 		</div>
 	</div>
 
