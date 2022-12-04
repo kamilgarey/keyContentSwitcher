@@ -37,6 +37,11 @@ For example: **_data-content-of-group="tabs_vertical" data-key-in-group="1"_**
 If there is no html content in group with css class **"active"** one get css class **"active"**. 
 
 ## Advanced Usage
+
+for non jQuery version root level object **keyContentSwitcher** is created
+jQuery related version creates **jQuery.keyContentSwitcher**
+
+
 ```javascript
 keyContentSwitcher.tabChanged(unique_key_of_control, function(unique_key_of_control, key-in-control)
 ```
